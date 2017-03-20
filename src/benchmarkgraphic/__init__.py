@@ -44,7 +44,7 @@ for sheet in sheets:
 
     for service in services:
         synthesis = {
-            'low_noise_score': 0,
+            'signal_noise_score': 0,
             'match_score': 0
         }
         count = 0
@@ -53,17 +53,18 @@ for sheet in sheets:
             if (data_point['service'] == service) &\
                     (data_point['base'] == sheet):
                 count += 1
-                synthesis['low_noise_score'] += data_point['low_noise_score']
+                synthesis['signal_noise_score'] +=\
+                    data_point['signal_noise_score']
                 synthesis['match_score'] += data_point['match_score']
 
 
         if count == 0:
             continue
 
-        synthesis['low_noise_score'] /= float(count)
+        synthesis['signal_noise_score'] /= float(count)
         synthesis['match_score'] /= float(count)
 
-        xs = [synthesis['low_noise_score']]
+        xs = [synthesis['signal_noise_score']]
         ys = [synthesis['match_score']]
 
         color = services_colors[service]
@@ -73,8 +74,8 @@ for sheet in sheets:
 
     pyplot.grid(True)
     pyplot.axis([0,5,0,5])
-    pyplot.xlabel('Low noise')
-    pyplot.ylabel('Correct labeling')
+    pyplot.xlabel('Signal over noise score')
+    pyplot.ylabel('Correct labeling score')
     title = sheet[0].upper() + sheet[1:] + ' dataset'
     pyplot.suptitle(title)
     pyplot.savefig('benchmark-' + sheet + '.png')
