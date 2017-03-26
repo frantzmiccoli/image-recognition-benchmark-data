@@ -22,12 +22,13 @@ for sheet in sheets:
 ### End: loading
 
 
-services = ['Amazon', 'Google', 'Microsoft']
+services = ['Amazon', 'Google', 'Microsoft', 'Clarifai']
 
 services_colors = {
     'Amazon': 'yellow',
     'Google': 'red',
-    'Microsoft': 'blue'
+    'Microsoft': 'blue',
+    'Clarifai': 'purple'
 }
 def get_color(item):
     service = item['service']
